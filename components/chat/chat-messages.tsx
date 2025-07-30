@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 
 import { Member, Message, Profile } from "@prisma/client";
@@ -62,7 +63,9 @@ export const ChatMessages = ({
     
   useChatSocket({ queryKey, addKey, updateKey });
   useChatScroll({
-    chatRef,
+    //@ts-expect-error
+    chatRef ,
+    //@ts-expect-error
     bottomRef,
     loadMore: fetchNextPage,
     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,

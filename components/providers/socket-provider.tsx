@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { io as ClientIO } from "socket.io-client";
 
 type socketContextType = {
-  socket: never | null;
+  socket: any | null;
   isConnected: boolean;
 };
 
@@ -22,6 +23,8 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const socketInstance = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL!,
       {

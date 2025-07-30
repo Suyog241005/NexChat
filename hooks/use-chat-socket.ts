@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Member, Message, Profile } from "@prisma/client";
@@ -30,6 +31,7 @@ export const useChatSocket = ({
     }
 
     socket.on(updateKey, (message: MessageWithMemberWithProfile) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       queryClient.setQueryData([queryKey], (oldData: any) => {
         if (!oldData || !oldData.pages || oldData.pages.length === 0) {
           return oldData;

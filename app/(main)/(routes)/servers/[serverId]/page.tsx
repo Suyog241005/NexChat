@@ -4,22 +4,20 @@ import { RedirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 interface ServerIdPageProps {
-  params: { serverId: string };
+  params: Promise<{ serverId: string }>;
 }
 
 const ServerIdPage = async ({ params }: ServerIdPageProps) => {
   const profile = await currentProfile();
+  const {serverId} = await params
 
   if (!profile) {
     return <RedirectToSignIn />;
   }
-  console.log("inside ServerId")
-  console.log(await params);
-  
 
   const server = await db.server.findFirst({
     where: {
-      id: (await params).serverId,
+      id: serverId,
       members: {
         some: {
           profileId: profile.id,
@@ -45,6 +43,6 @@ const ServerIdPage = async ({ params }: ServerIdPageProps) => {
   }
 
   // Redirect to the general channel
-  return redirect(`/servers/${params.serverId}/channels/${initialChannel.id}`);
+  return redirect(`/servers/${serverId}/channels/${initialChannel.id}`);
 };
 export default ServerIdPage;
