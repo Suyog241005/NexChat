@@ -38,9 +38,11 @@ export const NavigationItem = ({
           params?.serverId === id && "bg-primary/10 text-primary rounded-[16px]"
         )}>
           <Image
+          priority={true}
           src={imageUrl}
           alt="Channel"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={cn(
             "object-cover",
             params?.serverId === id && "rounded-[16px]"

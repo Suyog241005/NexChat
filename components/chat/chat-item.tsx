@@ -159,9 +159,11 @@ export const ChatItem = ({
               className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48"
             >
               <Image
+                priority={true}
                 src={fileUrl}
                 alt={content}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
               />
             </a>
